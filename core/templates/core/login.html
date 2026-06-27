@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>贴吧 - 登录/注册</title>
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/custom.css' %}" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">贴吧</a>
+  </div>
+</nav>
+<div class="container mt-3">
+  <ul class="nav nav-tabs" id="authTab">
+    <li class="nav-item">
+      <button class="nav-link {% if not show_register %}active{% endif %}" data-bs-toggle="tab" data-bs-target="#login-form">登录</button>
+    </li>
+    <li class="nav-item">
+      <button class="nav-link {% if show_register %}active{% endif %}" data-bs-toggle="tab" data-bs-target="#register-form">注册</button>
+    </li>
+  </ul>
+  <div class="tab-content mt-3">
+    <div class="tab-pane fade {% if not show_register %}show active{% endif %}" id="login-form">
+      {% if error_login %}<div class="alert alert-danger">{{ error_login }}</div>{% endif %}
+      <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <input class="form-control mb-2" name="username" placeholder="用户名" required>
+        <input class="form-control mb-2" type="password" name="password" placeholder="密码" required>
+        <button class="btn btn-primary">登录</button>
+      </form>
+    </div>
+    <div class="tab-pane fade {% if show_register %}show active{% endif %}" id="register-form">
+      {% if error_register %}<div class="alert alert-danger">{{ error_register }}</div>{% endif %}
+      <form method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+        <input class="form-control mb-2" name="username" placeholder="用户名" required>
+        <input class="form-control mb-2" type="password" name="password" placeholder="密码" required>
+        <button class="btn btn-success">注册</button>
+      </form>
+    </div>
+  </div>
+  <a href="/" class="btn btn-outline-secondary btn-sm mt-2">← 返回首页</a>
+</div>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

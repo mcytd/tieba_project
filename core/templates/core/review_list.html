@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h2>待审核帖子</h2>
+{% for post in posts %}
+  <div class="card mb-2">
+    <div class="card-body">
+      <h5>{{ post.title }}</h5>
+      <p>{{ post.content }}</p>
+      <small>作者：{{ post.author }} | {{ post.created_at }}</small>
+      <p class="text-warning">请在终端执行 python manage.py review 进行审核</p>
+    </div>
+  </div>
+{% empty %}
+  <p>没有待审核的帖子。</p>
+{% endfor %}
+{% endblock %}

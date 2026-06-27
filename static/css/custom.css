@@ -1,0 +1,173 @@
+/* ========== 页面容器带回弹淡入 ========== */
+.container {
+  animation: fadeInUp 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ========== 卡片悬浮 + 回弹 + 依次出现 ========== */
+.card {
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  border: none;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  animation: cardAppear 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55) backwards;
+}
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+}
+@keyframes cardAppear {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.card:nth-child(1) { animation-delay: 0.05s; }
+.card:nth-child(2) { animation-delay: 0.1s; }
+.card:nth-child(3) { animation-delay: 0.15s; }
+.card:nth-child(4) { animation-delay: 0.2s; }
+.card:nth-child(5) { animation-delay: 0.25s; }
+
+/* ========== 按钮回弹与悬浮 ========== */
+.btn {
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+.btn:active {
+  transform: scale(0.93);
+  transition: transform 0.1s;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* ========== 表单输入框聚焦动画 ========== */
+.form-control {
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+.form-control:focus {
+  transform: scale(1.02);
+  box-shadow: 0 0 0 0.2rem rgba(255,193,7,0.25);
+}
+
+/* ========== 导航链接下划线回弹 ========== */
+.navbar-nav .nav-link {
+  position: relative;
+  transition: color 0.3s;
+}
+.navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #ffc107;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  transform: translateX(-50%);
+}
+.navbar-nav .nav-link:hover::after {
+  width: 80%;
+}
+
+/* ========== 表格行渐入 ========== */
+.table tbody tr {
+  animation: rowFadeIn 0.4s ease backwards;
+}
+.table tbody tr:nth-child(1) { animation-delay: 0.1s; }
+.table tbody tr:nth-child(2) { animation-delay: 0.2s; }
+.table tbody tr:nth-child(3) { animation-delay: 0.3s; }
+.table tbody tr:nth-child(4) { animation-delay: 0.4s; }
+@keyframes rowFadeIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ========== 汉堡按钮动画 ========== */
+.navbar-toggler-icon-custom {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  position: relative;
+}
+.navbar-toggler-icon-custom span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  position: absolute;
+}
+.navbar-toggler-icon-custom span:nth-child(1) { top: 4px; }
+.navbar-toggler-icon-custom span:nth-child(2) { top: 11px; }
+.navbar-toggler-icon-custom span:nth-child(3) { top: 18px; }
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon-custom span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon-custom span:nth-child(2) {
+  opacity: 0;
+}
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon-custom span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ========== 导航栏滚动后添加阴影 ========== */
+.navbar.scrolled {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: box-shadow 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+/* ========== 回到顶部按钮 ========== */
+#backToTop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #ffc107;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.8);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  z-index: 999;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+#backToTop.show {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+#backToTop:hover {
+  background: #e0a800;
+  transform: scale(1.1) rotate(360deg);
+}
+
+/* ========== 详情页正文渐入 ========== */
+.card-body > p, .card-body > hr, .card-text {
+  animation: contentFadeIn 0.7s ease backwards;
+  animation-delay: 0.2s;
+}
+@keyframes contentFadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ========== 空状态提示呼吸效果 ========== */
+.empty-state {
+  animation: breathe 2s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.03); }
+}

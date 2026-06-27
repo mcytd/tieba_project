@@ -1,0 +1,12 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h2>系统状态</h2>
+<table class="table table-bordered">
+  <tr><td>Python 版本</td><td>{{ info.python_version }}</td></tr>
+  <tr><td>Django 版本</td><td>{{ info.django_version }}</td></tr>
+  <tr><td>注册用户数</td><td>{{ info.user_count }}</td></tr>
+  <tr><td>帖子总数</td><td>{{ info.post_count }} （已审核 {{ info.approved_count }} / 待审核 {{ info.pending_count }}）</td></tr>
+  <tr><td>数据库大小</td><td>{{ info.db_size }} KB</td></tr>
+  <tr><td>服务器时间</td><td>{{ info.server_time }}</td></tr>
+</table>
+{% endblock %}

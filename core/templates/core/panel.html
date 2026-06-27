@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h2>用户面板 - {{ request.user.username }}</h2>
+<p>权限等级：{{ request.user.permission_level }}</p>
+<div class="mb-3">
+  <a href="{% url 'system_status' %}" class="btn btn-outline-info btn-sm">系统状态</a>
+  <a href="{% url 'about' %}" class="btn btn-outline-secondary btn-sm">关于</a>
+</div>
+<h3>我的帖子</h3>
+{% if posts %}
+  {% for post in posts %}
+    <div class="card mb-2">
+      <div class="card-body d-flex justify-content-between align-items-center">
+        <div>
+          <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a>
+          {% if not post.approved %}<span class="badge bg-warning">待审核</span>{% endif %}
+          <small class="text-muted ms-2">{{ post.created_at|date:"Y-m-d H:i" }}</small>
+        </div>
+        {% if request.user.permission_level == 1 %}
+        <a href="{% url 'delete_post' post.id %}" class="btn btn-sm btn-danger" onclick="return confirm('确定删除？')">删除</a>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+{% else %}
+  <p>你还没有发布过帖子。</p>
+{% endif %}
+{% endblock %}

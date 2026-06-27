@@ -1,0 +1,10 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h2>发帖</h2>
+<form method="post">
+  {% csrf_token %}
+  <input class="form-control mb-2" name="title" placeholder="标题" required>
+  <textarea class="form-control mb-2" name="content" rows="5" placeholder="内容" required></textarea>
+  <button class="btn btn-primary">提交</button>
+</form>
+{% endblock %}
